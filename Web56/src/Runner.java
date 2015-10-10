@@ -1,3 +1,5 @@
+import Web56.Crawler56;
+import Web56.NumberCountPipleline;
 import us.codecraft.webmagic.Spider;
 /*
  * author : Yixin Luo
