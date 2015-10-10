@@ -68,10 +68,4 @@ public class Crawler56 implements PageProcessor{
 		}
 	}
 	
-	public static void main(String[] args) {
-    	/*先从电视剧的页面开始*/
-        Spider.create(new Crawler56()).addUrl(TeleplayPage).addPipeline(new NumberCountPipleline())
-                .run();
-    }
-	
 }
