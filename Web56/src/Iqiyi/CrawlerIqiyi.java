@@ -3,6 +3,7 @@ package Iqiyi;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
 /*
@@ -33,7 +34,20 @@ public class CrawlerIqiyi implements PageProcessor{
 	 * */
 	private static final String TypeRegrex = 
 			"http://list.iqiyi.com/www/\\w+/-------------11-\\w+-1-iqiyi--.html";
+	/*
+	 * xpath的提取规则
+	 * */
+	private static final String XPATHRULE_TITLE = "//div[@class='page-list']/"
+			+ "div[@class='wrapper-content']/div[@class='site-main']/"
+			+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
+			+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
+			+ "a[@class='site-piclist_pic_link']/@title";
 	
+	private static final String XPATHRULE_ID = "//div[@class='page-list']/"
+			+ "div[@class='wrapper-content']/div[@class='site-main']/"
+			+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
+			+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
+			+ "a[@class='site-piclist_pic_link']/@data-qipuid";
 	/*
 	 * 站点设置
 	 * */
@@ -57,18 +71,15 @@ public class CrawlerIqiyi implements PageProcessor{
 		page.addTargetRequest(TeleplayPage);
 		page.addTargetRequest(ShowPage);
 		page.addTargetRequest(CartoonPage);
+		/*
+		 * 提取页面中，底部的不同页面的链接
+		 * */
+		page.addTargetRequests(page.getHtml().xpath("//div[@class='mod-page']/a").links().all());
 		
-		page.addTargetRequests(page.getHtml().xpath("//div[@class='mod-page']/a/@href").links().all());
-		System.out.println(page.getUrl().toString());
 		if (page.getUrl().regex(TypeRegrex).match()) {
-			Selectable s = page.getHtml().xpath("//div[@class='page-list']/"
-					+ "div[@class='wrapper-content']/div[@class='site-main']/"
-					+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
-					+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
-					+ "a[@class='site-piclist_pic_link']");
 
-			page.putField(VIDEO_NAME, s.xpath("//@title"));
-			page.putField(VIDEO_ID, s.xpath("//@data-qipuid"));
+			page.putField(VIDEO_NAME, page.getHtml().xpath(XPATHRULE_TITLE).all());
+			page.putField(VIDEO_ID, page.getHtml().xpath(XPATHRULE_ID).all());
 		}
 	}
 	

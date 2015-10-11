@@ -21,7 +21,7 @@ public class IqiyiPipleline implements Pipeline{
 		List<String> name = new ArrayList<String>();
 		List<String> aid = new ArrayList<String>();
 		
-		for (Entry<String, Object> entry : items.getAll().entrySet()) {
+		for (Map.Entry<String, Object> entry : items.getAll().entrySet()) {
 			String key = (String)entry.getKey();
 			if (key.equals(CrawlerIqiyi.VIDEO_NAME)) {
 				name = (List<String>) entry.getValue();
