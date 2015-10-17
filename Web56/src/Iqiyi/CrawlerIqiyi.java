@@ -3,13 +3,13 @@ package Iqiyi;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.selector.Html;
-import us.codecraft.webmagic.selector.Selectable;
+
 
 /*
  * author : Yixin Luo
  * date : 2015/10/10
- * description : 爱奇艺网的网页解析程序
+ * description : 爱奇艺网的网页解析程序,抓取四大栏目中每部影片的aid和name，以便后边
+ *               得到每部影片的指数页面url.
  * */
 public class CrawlerIqiyi implements PageProcessor{
 	/*
@@ -82,5 +82,5 @@ public class CrawlerIqiyi implements PageProcessor{
 			page.putField(VIDEO_ID, page.getHtml().xpath(XPATHRULE_ID).all());
 		}
 	}
-	
+
 }

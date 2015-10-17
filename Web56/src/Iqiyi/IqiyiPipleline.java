@@ -9,6 +9,11 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+/*
+ * author : Yixin Luo
+ * date : 2015/10/11
+ * description : 根据得到的aid和name，组合成为每部影片的指数页面url
+ * */
 public class IqiyiPipleline implements Pipeline{
 
 	@Override
