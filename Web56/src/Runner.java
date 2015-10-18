@@ -2,6 +2,7 @@ import Iqiyi.CrawlerIqiyi;
 import Iqiyi.CrawlerZhishu;
 import Iqiyi.IqiyiPipleline;
 import Tudou.CrawlerTudou;
+import Tudou.TudouPipleline;
 import Web56.Crawler56;
 import Web56.NumberCountPipleline;
 import us.codecraft.webmagic.Spider;
@@ -39,7 +40,10 @@ public class Runner {
 	 * tudou抓取
 	 * */
 	private static void runnerTudou() {
-		Spider.create(new CrawlerTudou()).addUrl(CrawlerTudou.MoviePage).run();
+		String begin = "http://www.tudou.com/s3portal/service/pianku/data.action?"
+				+ "pageSize=90&app=mainsitepc&deviceType=1&tags=&tagType=3&firstTagId=5"
+				+ "&areaCode=110000&initials=&hotSingerId=&pageNo=1&sortDesc=quality";
+		Spider.create(new CrawlerTudou()).addUrl("http://www.tudou.com").addPipeline(new TudouPipleline()).run();
 	}
 	public static void main(String[] args) {
 		//runner56();
