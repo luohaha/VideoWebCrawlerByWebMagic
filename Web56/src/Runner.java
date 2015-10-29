@@ -1,3 +1,5 @@
+import Iqiyi.CommentCrawler;
+import Iqiyi.CommentPipleline;
 import Iqiyi.CrawlerIqiyi;
 import Iqiyi.CrawlerZhishu;
 import Iqiyi.IqiyiPipleline;
@@ -45,5 +47,12 @@ public class Runner {
 				+ "&areaCode=110000&initials=&hotSingerId=&pageNo=1&sortDesc=quality";
 		Spider.create(new CrawlerTudou()).addUrl("http://www.tudou.com")
 		.addPipeline(new TudouPipleline()).run();
+	}
+	/*
+	 * 提取评论api的url
+	 * */
+	public static void runnerGetIqiyiCommentUrl() {
+		String test = "http://www.iqiyi.com/v_19rrobq8l8.html#vfrm=2-4-0-1";
+		Spider.create(new CommentCrawler()).addUrl(test).addPipeline(new CommentPipleline()).run();;
 	}
 }
