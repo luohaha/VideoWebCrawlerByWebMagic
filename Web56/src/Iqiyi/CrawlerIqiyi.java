@@ -17,6 +17,7 @@ public class CrawlerIqiyi implements PageProcessor{
 	 * */
 	public static final String VIDEO_NAME = "video_name";
 	public static final String VIDEO_ID = "video_id";
+	public static final String VIDEO_URL = "video_url";
 	/*
 	 * 分别对应四大栏目的首页面：电影，电视剧，综艺，动画
 	 * */
@@ -37,17 +38,18 @@ public class CrawlerIqiyi implements PageProcessor{
 	/*
 	 * xpath的提取规则
 	 * */
-	private static final String XPATHRULE_TITLE = "//div[@class='page-list']/"
+	private static final String TOTAL = "//div[@class='page-list']/"
 			+ "div[@class='wrapper-content']/div[@class='site-main']/"
 			+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
 			+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
-			+ "a[@class='site-piclist_pic_link']/@title";
+			+ "a[@class='site-piclist_pic_link']/@";
+	private static final String XPATHRULE_TITLE = TOTAL + "title";
 	
-	private static final String XPATHRULE_ID = "//div[@class='page-list']/"
-			+ "div[@class='wrapper-content']/div[@class='site-main']/"
-			+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
-			+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
-			+ "a[@class='site-piclist_pic_link']/@data-qipuid";
+	private static final String XPATHRULE_ID = TOTAL + "data-qipuid";
+	/*
+	 * 提取电影播放页面的url
+	 * */
+	private static final String XPATHRULE_URL = TOTAL + "href";
 	/*
 	 * 站点设置
 	 * */
@@ -80,6 +82,7 @@ public class CrawlerIqiyi implements PageProcessor{
 
 			page.putField(VIDEO_NAME, page.getHtml().xpath(XPATHRULE_TITLE).all());
 			page.putField(VIDEO_ID, page.getHtml().xpath(XPATHRULE_ID).all());
+			page.putField(VIDEO_URL, page.getHtml().xpath(XPATHRULE_URL).all());
 		}
 	}
 

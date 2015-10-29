@@ -25,6 +25,7 @@ public class IqiyiPipleline implements Pipeline{
 		 * */
 		List<String> name = new ArrayList<String>();
 		List<String> aid = new ArrayList<String>();
+		List<String> url = new ArrayList<String>();
 		
 		for (Map.Entry<String, Object> entry : items.getAll().entrySet()) {
 			String key = (String)entry.getKey();
@@ -32,6 +33,8 @@ public class IqiyiPipleline implements Pipeline{
 				name = (List<String>) entry.getValue();
 			} else if (key.equals(CrawlerIqiyi.VIDEO_ID)) {
 				aid = (List<String>) entry.getValue();
+			} else if (key.equals(CrawlerIqiyi.VIDEO_URL)) {
+				url = (List<String>) entry.getValue();
 			}
 			
 		}
@@ -39,6 +42,7 @@ public class IqiyiPipleline implements Pipeline{
 			System.out.println(name.get(i)+" 指数页面为: "+
 					"http://index.iqiyi.com/q/?aid="+aid.get(i)+"&name="
 							+ name.get(i));
+			System.out.println("播放页面："+url.get(i));
 		}
 	}
 
