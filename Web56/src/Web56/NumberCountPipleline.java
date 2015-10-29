@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import Util.GlobalVar;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;

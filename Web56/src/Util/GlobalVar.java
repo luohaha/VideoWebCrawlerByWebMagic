@@ -1,4 +1,4 @@
-package Web56;
+package Util;
 import java.util.HashMap;
 import java.util.Map;
 

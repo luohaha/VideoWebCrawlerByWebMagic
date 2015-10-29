@@ -5,6 +5,7 @@ import Iqiyi.CrawlerZhishu;
 import Iqiyi.IqiyiPipleline;
 import Tudou.CrawlerTudou;
 import Tudou.TudouPipleline;
+import Util.Tools;
 import Web56.Crawler56;
 import Web56.NumberCountPipleline;
 import us.codecraft.webmagic.Spider;
@@ -53,6 +54,7 @@ public class Runner {
 	 * */
 	public static void runnerGetIqiyiCommentUrl() {
 		String test = "http://www.iqiyi.com/v_19rrobq8l8.html#vfrm=2-4-0-1";
+		Tools.clearInfoForFile("./commentUrl.txt");
 		Spider.create(new CommentCrawler()).addUrl(test).addPipeline(new CommentPipleline()).run();;
 	}
 }
