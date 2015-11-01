@@ -8,6 +8,13 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.selector.Json;
 
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /*
  * author : Yixin Luo
  * date : 2015/10/17
@@ -24,8 +31,13 @@ public class TudouPipleline implements Pipeline{
 			System.out.println(each.getKey()+":\n");
 			Json get = (Json)each.getValue();
 			List<String> title = get.jsonPath("$.items[*].title").all();
+			List<String> playUrl = get.jsonPath("$.items[*].playUrl").all();
+			List<String> albumId = get.jsonPath("$.items[*].albumId").all();
+			List<String> alias = get.jsonPath("$.items[*].alias").all();
+			List<String> actors = get.jsonPath("$.items[*].actors").all();
+
 			for (int i = 0; i < title.size(); i++) {
-				System.out.println("第"+String.valueOf(i)+"个："+title.get(i)+"\n");
+			 	System.out.println(each.getValue());
 			}
 		}
 	}

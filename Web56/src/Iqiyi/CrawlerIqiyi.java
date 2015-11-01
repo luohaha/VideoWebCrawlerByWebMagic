@@ -36,19 +36,18 @@ public class CrawlerIqiyi implements PageProcessor{
 	private static final String TypeRegrex = 
 			"http://list.iqiyi.com/www/\\w+/-------------11-\\w+-1-iqiyi--.html";
 	/*
-	 * xpath的提取规则
-	 * */
+	* xpath的提取规则
+	* */
 	private static final String TOTAL = "//div[@class='page-list']/"
-			+ "div[@class='wrapper-content']/div[@class='site-main']/"
-			+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
-			+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
-			+ "a[@class='site-piclist_pic_link']/@";
+	+ "div[@class='wrapper-content']/div[@class='site-main']/"
+	+ "div[@class='wrapper-cols']/div[@class='wrapper-piclist']/"
+	+ "ul[@class='site-piclist']/li/div[@class='site-piclist_pic']/"
+	+ "a[@class='site-piclist_pic_link']/@";
 	private static final String XPATHRULE_TITLE = TOTAL + "title";
-	
 	private static final String XPATHRULE_ID = TOTAL + "data-qipuid";
 	/*
-	 * 提取电影播放页面的url
-	 * */
+	* 提取电影播放页面的url
+	* */
 	private static final String XPATHRULE_URL = TOTAL + "href";
 	/*
 	 * 站点设置

@@ -1,5 +1,8 @@
 package Iqiyi;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,8 @@ public class IqiyiPipleline implements Pipeline{
 		List<String> name = new ArrayList<String>();
 		List<String> aid = new ArrayList<String>();
 		List<String> url = new ArrayList<String>();
+		FileWriter fw = null;
+		FileWriter fwPlayUrl = null;
 		
 		for (Map.Entry<String, Object> entry : items.getAll().entrySet()) {
 			String key = (String)entry.getKey();
@@ -38,11 +43,24 @@ public class IqiyiPipleline implements Pipeline{
 			}
 			
 		}
-		for (int i = 0; i < name.size(); i++) {
+		try {
+			fw = new FileWriter("./urls.txt", true);
+			fwPlayUrl = new FileWriter("./playUrls.txt", true);
+			for (int i = 0; i < name.size(); i++) {
+			/*
 			System.out.println(name.get(i)+" 指数页面为: "+
 					"http://index.iqiyi.com/q/?aid="+aid.get(i)+"&name="
-							+ name.get(i));
-			System.out.println("播放页面："+url.get(i));
+							+ name.get(i));*/
+				fw.write("http://uaa.iqiyi.com/video_index/v1/get_user_profile?album_id="+aid.get(i)+"&album_name="
+							+ name.get(i)+"&callback=window.Q.__callbacks__.cbgg1cdr");
+				fw.write("\n");
+				fwPlayUrl.write(url.get(i));
+				fwPlayUrl.write("\n");
+			}
+			fw.close();
+			fwPlayUrl.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -98,7 +98,8 @@ public class CrawlerTudou implements PageProcessor{
 	}
 	
 	private void PutField(String tag, Page page) {
-		if (page.getJson().jsonPath("$.items") != null) {
+		System.out.println(page.getJson().jsonPath("$.items"));
+		if (page.getJson().jsonPath("$.items").toString() != null) {
 			page.putField(tag, page.getJson());
 			int currentPage = getPageNoFromUrl(page.getUrl().toString());
 			page.addTargetRequest(getUrlToFetch(tag, ++currentPage));
