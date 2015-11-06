@@ -22,4 +22,14 @@ public class GlobalVar {
 	 * 爱妻一的电影名称和评论url对应 
 	 * */
 	public static HashMap<String, String>map = new HashMap<String, String>();
+	
+	/*
+	 * letv 的抓取剩余电影个数
+	 * */
+	public static int TotalMovie = 0;
+	public static int currentCatchMoive = 0;
+	/*
+	 * letv的标记
+	 * */
+	public static boolean LETV_MARK = false;
 }

@@ -6,6 +6,8 @@ import Iqiyi.CrawlerIqiyi;
 import Iqiyi.CrawlerZhishu;
 import Iqiyi.IqiyiPipleline;
 import Iqiyi.ZhishuPipleline;
+import Letv.LetvCrawler;
+import Letv.LetvPipleline;
 import Tudou.CrawlerTudou;
 import Tudou.TudouPipleline;
 import Utils.Tools;
@@ -63,5 +65,20 @@ public class Runner {
 	public static void runnerGetComments() {
 		String url ="http://api.t.iqiyi.com/qx_api/comment/get_video_comments?aid=1153133&categoryid=1&cb=fnsucc&escape=true&need_reply=true&need_subject=true&need_total=1&page=1&page_size=10&page_size_reply=3&qitan_comment_type=1&qitancallback=fnsucc&qitanid=1153133&sort=hot&t=&tvid=410345400";
 		Spider.create(new AnalysisCommentCrawler()).addPipeline(new AnalysisCommentPipleLine()).addUrl(url).thread(30).run();
+	}
+	/*
+	 * 获取letv的电影vid
+	 * */
+	public static void runnerGetLetvVids() {
+		Tools.clearInfoForFile("./letvVid.txt");
+		String url = "http://list.letv.com/apin/chandata.json?c=1&d=1&md=&o=&s=1&p=1";
+		Spider.create(new LetvCrawler()).addPipeline(new LetvPipleline()).addUrl(url).thread(30).run();
+	}
+	/*
+	 * letv ： 根据api获取评论
+	 * */
+	public static void runnerGetLetvComments() {
+		String url = "http://www.letv.com/";
+		Spider.create(new Letv.CommentCrawler()).addPipeline(new Letv.CommentPipleline()).addUrl(url).thread(30).run();
 	}
 }

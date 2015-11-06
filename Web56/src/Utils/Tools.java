@@ -22,4 +22,8 @@ public class Tools {
 	            e.printStackTrace();
 	        }
 	    }
+	 
+	 /*
+	  * 获取文件的长度
+	  * */
 }
