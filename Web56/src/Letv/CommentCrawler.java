@@ -48,13 +48,15 @@ public class CommentCrawler implements PageProcessor{
 				System.err.println("文件未存在!");
 			addTargetsFromFile(page, file);
 		}
-		if (page.getUrl().toString().split("?")[0].equals(LetvApi.returnApiRegex())) {
+
+		if (page.getUrl().toString().split("\\?")[0].equals(LetvApi.returnApiRegex())) {
 			/*符合api的规则*/
-			JSONObject object = JSONObject.parseObject(page.getJson().toString());
+			JSONObject object = JSONObject.parseObject(
+					page.getJson().toString().substring(7, page.getJson().toString().length()-1));
 			JSONArray array = object.getJSONArray("data");
-			List<String> datas = new ArrayList<String>();
-			for (int i = 0; i < datas.size(); i++) {
-				datas.add(array.getJSONObject(i).getString("content"));
+			List<JSONObject> datas = new ArrayList<JSONObject>();		
+			for (int i = 0; i < array.size(); i++) {
+				datas.add(array.getJSONObject(i));
 			}
 			page.putField("comments", datas);
 		}

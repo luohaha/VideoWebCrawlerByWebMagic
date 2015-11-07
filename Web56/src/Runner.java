@@ -78,7 +78,7 @@ public class Runner {
 	 * letv ： 根据api获取评论
 	 * */
 	public static void runnerGetLetvComments() {
-		String url = "http://www.letv.com/";
+		String url = "http://www.letv.com";
 		Spider.create(new Letv.CommentCrawler()).addPipeline(new Letv.CommentPipleline()).addUrl(url).thread(30).run();
 	}
 }
