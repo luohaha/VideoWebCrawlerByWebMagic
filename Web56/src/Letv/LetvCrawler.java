@@ -42,13 +42,17 @@ public class LetvCrawler implements PageProcessor{
 			GlobalVar.TotalMovie = object.getInteger("album_count");
 			JSONArray albumList = object.getJSONArray("album_list");
 
-			List<String> vidList = new ArrayList<String>();
+			/*
+			 * 获取vid和name
+			 * */
+			List<String> vidAndNameList = new ArrayList<String>();
 			for (int i = 0; i < albumList.size(); i++) {
 				JSONObject each = albumList.getJSONObject(i);
-				vidList.add(each.getString("vids").split(",")[0]);
+				vidAndNameList.add(each.getString("vids").split(",")[0]+",,,"+each.getString("name"));
+
 				GlobalVar.currentCatchMoive += 1;
 			}
-			page.putField("vid", vidList);
+			page.putField("vid", vidAndNameList);
 			int currentPage = getUrlCurrentPage(page.getUrl().toString());
 			if (GlobalVar.TotalMovie > GlobalVar.currentCatchMoive) {
 				//还未抓取完成

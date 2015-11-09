@@ -32,4 +32,8 @@ public class GlobalVar {
 	 * letv的标记
 	 * */
 	public static boolean LETV_MARK = false;
+	/*
+	 * letv的map,把电影名字和id对应
+	 * */
+	public static HashMap<String, String>letvMap = new HashMap<String, String>();
 }

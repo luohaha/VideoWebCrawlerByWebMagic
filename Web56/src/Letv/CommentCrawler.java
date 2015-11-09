@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import Utils.GlobalVar;
+import Utils.Tools;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -74,7 +75,9 @@ public class CommentCrawler implements PageProcessor{
 			while ((line = br.readLine()) != null) {
 				if (line == null || line.equals(""))
 					continue;
-				page.addTargetRequest(LetvApi.create().setRows(20).setPage(1).setXid(line).toString());
+				String[] lines = line.split(",,,");
+				page.addTargetRequest(LetvApi.create().setRows(20).setPage(1).setXid(lines[0]).toString());
+				GlobalVar.letvMap.put(lines[0], lines[1]);
 			}
 			br.close();
 			fr.close();
@@ -83,6 +86,10 @@ public class CommentCrawler implements PageProcessor{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Tools.getFileLineNumber("./letvVid.txt"));
 	}
 
 }

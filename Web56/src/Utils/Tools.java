@@ -1,8 +1,10 @@
 package Utils;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.LineNumberReader;
 
 public class Tools {
 	/*
@@ -26,4 +28,22 @@ public class Tools {
 	 /*
 	  * 获取文件的长度
 	  * */
+	 public static int getFileLineNumber(String filename) {
+		 File file = new File(filename);
+		 long fileLength = file.length();
+		 LineNumberReader lnr = null;
+		 int lines = 0;
+		 try{
+			 lnr = new LineNumberReader(new FileReader(file));
+			 if (lnr != null) {
+				 
+				 lnr.skip(fileLength);
+				 lines = lnr.getLineNumber();
+				 lnr.close();
+			 }
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		 return lines;
+	 }
 }
