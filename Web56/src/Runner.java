@@ -6,6 +6,7 @@ import Iqiyi.CrawlerIqiyi;
 import Iqiyi.CrawlerZhishu;
 import Iqiyi.IqiyiPipleline;
 import Iqiyi.ZhishuPipleline;
+import Letv.LetvApi;
 import Letv.LetvCrawler;
 import Letv.LetvPipleline;
 import Tudou.CrawlerTudou;
@@ -79,6 +80,6 @@ public class Runner {
 	 * */
 	public static void runnerGetLetvComments() {
 		String url = "http://www.letv.com";
-		Spider.create(new Letv.CommentCrawler()).addPipeline(new Letv.CommentPipleline()).addUrl(url).thread(30).run();
+		Spider.create(new Letv.CommentCrawler()).addPipeline(new Letv.CommentPipleline()).addUrl(LetvApi.create().setXid(23910410).toString()).thread(30).run();
 	}
 }

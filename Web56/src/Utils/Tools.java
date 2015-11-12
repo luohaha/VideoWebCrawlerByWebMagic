@@ -28,8 +28,10 @@ public class Tools {
 	 /*
 	  * 获取文件的长度
 	  * */
-	 public static int getFileLineNumber(String filename) {
+	 public static int getFileLineSize(String filename) {
 		 File file = new File(filename);
+		 if (!file.exists())
+			 return 0;
 		 long fileLength = file.length();
 		 LineNumberReader lnr = null;
 		 int lines = 0;

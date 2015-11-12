@@ -55,11 +55,40 @@ public class CommentCrawler implements PageProcessor{
 			JSONObject object = JSONObject.parseObject(
 					page.getJson().toString().substring(7, page.getJson().toString().length()-1));
 			JSONArray array = object.getJSONArray("data");
-			List<JSONObject> datas = new ArrayList<JSONObject>();		
-			for (int i = 0; i < array.size(); i++) {
-				datas.add(array.getJSONObject(i));
-			}
-			page.putField("comments", datas);
+			if (array.size() != 0) {
+				List<JSONObject> datas = new ArrayList<JSONObject>();		
+				for (int i = 0; i < array.size(); i++) {
+					datas.add(array.getJSONObject(i));
+				}
+				page.putField("comments", datas);
+				/*
+				 * 1.获取当前电影所有的评论数目
+				 * */
+				int count = object.getInteger("total");
+				/*
+				 * 2.获取当前已有的评论数目
+				 * */
+				LetvApi api = LetvApi.getLetvApi(page.getUrl().toString());
+				String moviename = GlobalVar.letvMap.get(api.xid);
+				int currentCount = Tools.getFileLineSize("./letv/"+moviename+".txt");
+				if (count - currentCount > 0) {
+					System.out.println(moviename+" "+String.valueOf(count)+"/"+String.valueOf(currentCount));
+					if (count-currentCount <= 20) {
+						api.rows = count - currentCount;
+						api.page += 1;
+						page.addTargetRequest(api.toString());
+					} else {
+						api.rows = 20;
+						api.page += 1;
+						page.addTargetRequest(api.toString());
+					}
+				} else if (count - currentCount < 0) {
+					System.err.println(moviename+" 抓取出错!");
+				} else {
+					System.out.println(moviename + " 已经完成");
+				}
+			}//if
+			
 		}
 		
 	}
@@ -89,7 +118,7 @@ public class CommentCrawler implements PageProcessor{
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(Tools.getFileLineNumber("./letvVid.txt"));
+		
 	}
 
 }
